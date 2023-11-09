@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Online Shopping</title>
+	<link rel="stylesheet" type="text/css" href="view.css">
+</head>
+<body>
+	<header>
+		<nav>
+			
+			<div class="dropdown">
+				
+				<span><h1>User info</h1></span>
+				<div class="dropdown-content">
+					<h4>
+						<p> <%=myself.fullName%> </p>
+						<p>Balance : <%=myself.balance%> taka </p>
+					</h4>
+				</div>
+			  </div>
+		
+      <h1> <center>Online Shopping</center></h1>
+			<a href="/logout">Logout</a>
+		</nav>
+	</header>
+
+	<main>
+		<form method="post" action="/card">
+			<h2>Your Purchase Information</h2>
+			<table class="css-serial">
+				<thead>
+					<tr>
+						<th>SL</th>
+						<th>Product</th>
+						<th style="width:30%">Quantity</th>
+						<th>Price</th>
+					</tr>
+				</thead>
+        
+				<tbody>
+
+					<%if(keybord!=0){%>
+          
+					<tr>
+						<td> </td>
+						<td><input type="hidden" name="productName" value="keybord"> keybord</td>
+						<td><input type="hidden" name="quantity" value=<%=keybord%> ><%=keybord%></td>
+						<td><input type="hidden" name="price" value=<%=keybord*800%> > <%=keybord*800%> </td>
+					</tr>
+					<%}%>
+
+                    <%if(mouse!=0){%>
+                    <tr>
+						<td> </td>
+						<td><input type="hidden" name="productName" value="mouse"> mouse</td>
+						<td><input type="hidden" name="quantity" value=<%=mouse%> > <%=mouse%></td>
+						<td><input type="hidden" name="price" value=<%=mouse*300%> > <%=mouse*300%> </td>
+					</tr>
+					<%}%>
+
+					<%if(pendrive!=0){%>
+                    <tr>
+						<td> </td>
+						<td><input type="hidden" name="productName" value="pendrive"> pendrive</td>
+						<td><input type="hidden" name="quantity" value=<%=pendrive%> ><%=pendrive%></td>
+						<td><input type="hidden" name="price" value=<%=pendrive*500%> > <%=pendrive*500%> </td>
+					</tr>
+					<%}%>
+          
+          
+				</tbody>
+				
+			</table>
+			<h4>
+				<input type="hidden" name="total" value=<%=keybord*800+mouse*300+pendrive*500%> >
+				<p style="text-align:center;">The total amount of Price =  <%=keybord*800+mouse*300+pendrive*500%>  taka.</p>
+		    </h4>
+
+			
+
+
+		
+
+
+		<button  type="submit" name="submit-btn"> <h3>Submit</h3></button>
+	</form>
+	</main>
+	<style>
+		input[type="number"] 
+		{
+			width: 100%;
+			padding: 8px;
+			border-radius: 5px;
+			border: 1px solid #ccc; 
+			font-size:17px;
+		}
+	</style>
+</body>
+</html>

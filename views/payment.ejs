@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Online Shopping</title>
+	<link rel="stylesheet" type="text/css" href="payment.css">
+  <script>
+    function validat() {
+      let ed = document.forms["card_form"]["ed"].value;
+      let cvv = document.forms["card_form"]["c"].value;
+      let cn=document.form["card_form"]["cn"].value;
+      let ch=document.form["card_form"]["ch"].value;
+      let balance=document.form["card_form"]["balance"].value;
+  
+      let ed1 = document.forms["card_form"]["expiryDate"].value;
+      let cvv1 = document.forms["card_form"]["cvv"].value;
+      let cn1=document.form["card_form"]["cardNumber"].value;
+      let ch1=document.form["card_form"]["cardHolder"].value;
+      let total=document.form["card_form"]["total"].value;
+  
+     
+        if (ed!=ed1 || cvv!=cvv1 || cn!=cn1 || ch!=ch1) {  //
+          alert("The information doesn't match");
+          return false;
+        }
+        else if(parseInt(total) > parseInt(balance)){
+          alert("Sorry! Insufficient Balance");
+          return false;
+        }     
+      return false;
+    }
+    </script>
+  
+</head>
+<body>
+  <input type="hidden" id="status" value="<%=status%>" >
+  <input type="hidden" id="message" value="<%=message%>" >
+	<header>
+		<nav>
+			
+			<div class="dropdown">
+				
+				<span><h1>User info</h1></span>
+				<div class="dropdown-content">
+					<h4>
+            <p> <%=myself.fullName%> </p>
+						<p>Balance : <%=myself.balance%> taka</p>
+			</h4>
+				</div>
+			  </div>
+		
+      <h1> <center>Online Shopping</center></h1>
+			<a href="/logout">Logout</a>
+		</nav>
+	</header>
+
+	<main>
+			
+<!-- Form Information -->
+  <style>
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      font-weight: bold;
+    }
+    input[type="text"], input[type="number"] {
+      width: 100%;
+      padding: 5px;
+    }
+  </style>
+  <% let have_account=0; if(myself.card_number){have_account=1}%>
+  <h2>User Payment</h2>
+  <p style="text-align: center;text-decoration: black;">( Enter Your Credit Card Information )</p>
+  <form method="post" action="/payment" name="'card_form" onSubmit="return fun();">
+    <div class="form-group">
+      <label for="cardNumber">Credit Card Number:</label>
+      <input type="text" id="cardNumber" name="cardNumber" maxlength="16" pattern="[0-9]{16}" value=<%=myself.card_number%> required>
+      <input type="hidden" name="cn" value=<%=myself.card_number%> >
+    </div>
+    <div class="form-group">
+      <label for="cardHolder">Card Holder:</label>
+      <input type="text" id="cardHolder" name="cardHolder" value=<%=myself.fullName%> required>
+      <input type="hidden" name="'ch" value=<%=myself.fullName%>>
+    </div>
+    <div class="form-group">
+      <label for="expiryDate">Expiry Date:</label>
+      <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY" required>
+      <input type="hidden" name="ed" value=<%=myself.expiry_date%> >
+      <input type="hidden" name="have_account" value=<%=have_account%>>
+    </div>
+    <div class="form-group">
+      <label for="cvv">CVV:</label>
+      <input type="number" id="cvv" name="cvv" min="100" max="999" required>
+      <input type="hidden" name="c" value=<%=myself.cvv%>>
+    </div>
+
+    <h4>
+      <input type="hidden" name="total" value=<%=total%>>
+      <input type="hidden" name="balance" value=<%=myself.balance%> >
+      <p style="text-align:center;">The total amount of Price =  <%=total%>  taka.</p>
+    </h4>
+      <div class="form-group">
+        <h3>
+          <!-- <button type="submit" onclick="validateForm()"> submit</button> -->
+          <input class="button2" type="submit" value="Submit"> 
+        </h3>
+      </div>    
+    </form>
+  </main>
+</body>
+    <script src="vendor/jquery/jquery.min.css"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="alert/dist/sweetalert.css">
+    <script type="text/javascript">
+      var status=document.getElementById("status").value;
+      var message=document.getElementById("message").value;
+      if(status=="success"){
+        swal("Congrats","Account Created Successfully", "success");
+      }
+      else if(status=="failed"){
+        swal("Sorry",message, "error");
+      }
+
+    </script>
+</html>
+<script>
+  function fun(){
+
+      // let balance=document.form["card_form"]["balance"].value;  
+      // let total=document.form["card_form"]["total"].value;
+
+      // if(document.forms["card_form"]["ed"].value!=document.forms["card_form"]["expiryDate"].value ||
+      //    document.forms["card_form"]["c"].value !=document.forms["card_form"]["cvv"].value ||
+      //    document.form["card_form"]["cn"].value!=document.form["card_form"]["cardNumber"].value||
+      //    document.form["card_form"]["ch"].value!=document.form["card_form"]["cardHolder"].value);
+    return ;
+  }
+</script>
+

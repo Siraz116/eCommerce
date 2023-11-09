@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Online Shopping</title>
+	<link rel="stylesheet" type="text/css" href="receipt.css">
+	<!-- Disable Button -->
+
+	<script>
+        function disableButton1() {  
+             // Optionally, change the button text
+             document.getElementById('myButton1').innerText = 'Added Keyboard';
+             // Disable the button
+             document.getElementById('myButton1').disabled = true;    
+        }
+        function disableButton2() {  
+             // Optionally, change the button text
+             document.getElementById('myButton2').innerText = 'Added Mouse';
+             // Disable the button
+             document.getElementById('myButton2').disabled = true;    
+        }
+        function disableButton3() {  
+             // Optionally, change the button text
+             document.getElementById('myButton3').innerText = 'Added Pendrive';
+             // Disable the button
+             document.getElementById('myButton3').disabled = true;    
+        }
+      </script>
+
+
+
+</head>
+<body>
+	<header>
+		<nav>
+			
+			<div class="dropdown">
+				
+				<span><h1><%=myself.role%> info</h1></span>
+				<div class="dropdown-content">
+			<h4>
+				<p> <%=myself.fullName%> </p>
+				<p>Balance : <%=myself.balance%> taka </p>
+			</h4>
+			<% let text="";
+                if(myself.role=="admin"){text="Confirm"}
+                else if(myself.role=="supplier"){text="Supply"}
+                else if(myself.role=="user"){text="Received"} %>
+			<button  type="submit" name="submit-btn"> <a href="/history"><h3>Previous Records</h3></a></button>
+
+				</div>
+
+			  </div>
+		
+      <h1> <center>Supplied Orders</center></h1>
+			<a href="/logout">Logout</a>
+		</nav>
+	</header>
+
+	<style>
+		.form-group {
+      margin-bottom: 20px;
+    }
+		label {
+		  display: block;
+		  font-weight: bold;
+		}
+		input[type="text"], input[type="number"] {
+		  width: 30%;
+		  padding: 5px;
+		  text-align: center;
+		}
+	  </style>
+
+ <%orders.forEach(function(item) { %>
+
+    <main>	
+        <!-- <button id = "x">
+            <h1>X</h1>
+         </button>	 -->
+        <h2>Customer Details</h2>
+        <table class="css-serial">
+            <thead>
+                <tr>
+                    <th>Name </th>
+                    <td> <%=item.customerName%></td>	
+                </tr>
+            </thead>
+            <tbody>            
+                <tr>
+                    <th> Mobile </th>
+                    <td> <%=item.customerPhone%> </td>               
+                </tr>
+                <tr>
+                    <th> Address </th>
+                    <td> <%=item.customerAddress%> </td>               
+                </tr>
+                <tr>
+                    <% let date=item.time.getDate() + "-" + (parseInt( item.time.getMonth() )+parseInt('1'))+ "-" +item.time.getFullYear()%>
+                    <th>Order Date</th>
+                    <td>                    
+                        <div id="date"> <%=date%></div>
+                        <!-- <script src="script.js"></script> -->
+                    </td>               
+                </tr> 
+                <tr>
+                    <th> Transaction ID </th>
+                    <td> <%=item.transactionId%> </td>               
+                </tr>         
+            </tbody>      
+        </table>   
+    <form method="post" action="/Confirm" >
+        <h2>Purchase Information</h2>
+        <table class="css-serial">
+            <thead>
+                <tr>
+                    <th>SL</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>             
+                </tr>
+            </thead>
+            <tbody>  
+                <% item.products.forEach(function(malamal) { %>   
+                <tr>
+                    <td> </td>
+                    <td> <%=malamal.productName%></td>
+                    <td> <%=malamal.quantity%></td>
+                    <td> <%=malamal.price%></td>
+                    
+                </tr>
+                <% }); %> 
+                <!-- <tr>
+                    <td> </td>
+                    <td> Mouse </td>
+                    <td> 1 </td>
+                    <td>$299.99 </td>
+                </tr>             -->
+            </tbody>        
+        </table>
+        <h4>
+            <p style="text-align:center;" >The total amount of Price =  <%=item.totalCost%>  taka.</p>
+        </h4>
+        <!-- <h4> -->
+            <p style="text-align:center;" class="adBottom">Order Status = <%=item.status%> by supplier</p>
+        <!-- </h4> -->
+        <input type="hidden" name="orderID" value=<%=item._id%> >
+        <center><button  type="submit" name="submit_btn" value="confirmed"> <h3>Deliver</h3></button></center>
+        <button id = "x" name="submit_btn" value="canceled">
+            <h3>Cancel</h3>
+         </button>
+    </form>
+    
+    </main>
+<% }); %> 	
+<%let message="";if(myself.role=="supplier") {text="Suppli"};%>
+<% if(orders.length==0){%>
+    <br>
+    <br>
+    <br>
+    <center><h2>Alhamdulillah, All Supplied Orders Are <%=text%>ed !</h2> </center>
+<%};%>
+
+<script>
+    setInterval(function(){
+    var myElement = document.getElementsByClassName('adBottom');
+    let l=myElement.length;
+
+    for(let i=0; i<l; i++){
+            if(myElement[i].style["visibility"]=="hidden"){
+            myElement[i].style["visibility"]="visible";
+        }
+        else
+        {
+            myElement[i].style["visibility"]="hidden";
+        }
+    }
+
+    
+},1500);
+</script>
+</body>
+</html>

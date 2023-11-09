@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Online Shopping</title>
+	<link rel="stylesheet" type="text/css" href="payment.css">
+</head>
+<body>
+	<header>
+		<nav>
+			
+			<div class="dropdown">
+				
+				<span><h1>User info</h1></span>
+				<div class="dropdown-content">
+					<h4>
+            <p> new_user </p>
+						<p>Balance : 0 taka </p>
+			</h4>
+				</div>
+			  </div>
+		
+      <h1> <center>Online Shopping</center></h1>
+			<a href="/logout">Logout</a>
+		</nav>
+	</header>
+
+	<main>
+			
+<!-- Form Information -->
+  <style>
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      font-weight: bold;
+    }
+    input[type="text"], input[type="number"] {
+      width: 100%;
+      padding: 5px;
+    }
+  </style>
+  <% let have_account=0%>
+  <h2>User Payment</h2>
+  <p style="text-align: center;text-decoration: black;">( Enter Your Credit Card Information )</p>
+  <form method="post" action="/create-account" name="'card_form" >
+    <div class="form-group">
+      <label for="cardNumber">Credit Card Number:</label>
+      <input type="text" id="cardNumber" name="cardNumber" maxlength="16" pattern="[0-9]{16}" required>
+    </div>
+    <div class="form-group">
+      <label for="cardHolder">Card Holder:</label>
+      <input type="text" id="cardHolder" name="cardHolder" required>
+    </div>
+    <div class="form-group">
+      <label for="expiryDate">Expiry Date:</label>
+      <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY" required>
+      <input type="hidden" name="have_account" value=<%=have_account%>>
+    </div>
+    <div class="form-group">
+      <label for="cvv">CVV:</label>
+      <input type="number" id="cvv" name="cvv" min="100" max="999" required>
+    </div>
+
+	<h4>
+    
+		
+	</h4>
+    <div class="form-group">
+      <h3>
+        <input class="button2" type="submit" value="  Submit  "> 
+      </h3>
+    </div>    
+  </form>
+  </main>
+
+    <!-- <script>
+      function validateForm() {
+        let ed = document.forms["card_form"]["expiryDate"].value;
+        let cvv = document.forms["card_form"]["cvv"].value;
+        let cn=document.form["card_form"]["card_number"].value;
+        let ch=document.form["card_form"]["card_holder"].value;
+       if(have_account==1){
+          if (ed!=myself.expiryDate || cvv!=myself.cvv || cn!=myself.card_number || ch!=myself.fullName) {  //
+            alert("The information doesn't match");
+            return false;
+          }
+          return true;
+       }
+        return true;
+      }
+      </script> -->
+</body>
+</html>

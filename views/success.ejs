@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Online Shopping</title>
+	<link rel="stylesheet" type="text/css" href="success.css">
+</head>
+<body>
+	<header>
+		<nav>
+			
+			<div class="dropdown">
+				
+				<span><h1>User info</h1></span>
+				<div class="dropdown-content">
+					<h4>
+						<p> <%=myself.fullName%> </p>
+						<p>Balance : <%=myself.balance%> taka</p>
+						<button  type="submit" name="submit-btn"> <a href="/history"><h3>Previous Purchase</h3></a></button>
+					</h4>
+				</div>
+			  </div>
+		
+      <h1> <center>Online Shopping</center></h1>
+			<a href="/logout">Logout</a>
+		</nav>
+	</header>
+
+	<main>
+        <table>
+
+			
+<!-- Congratulations -->
+
+
+  <th><h2>Your Purchase Information</h2></th>
+  <tr>
+  <td>
+        <p>Dear <%=myself.fullName%>,</p>
+        <p>Payment Tk <%=total%> to Online Shopping Limited is successful. </p>
+  </td>
+  </tr>
+
+   	
+        </table>
+        <center><button class="button" type="submit"><a href="/user"><h3> > go back > </h3></a></button>	</center>
+
+    </main>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Online Shopping</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link rel="stylesheet" href="login.css">
+    <!---we had linked our css file----->
+</head>
+<body>
+    <input type="hidden" id="status" value="<%=status%>" >
+    <div class="full-page">
+        <div class="navbar">
+           <div>
+                <a href='login.html'>Welcome to Online Shopping</a>
+            </div>
+        
+            <nav>
+                <ul id='MenuItems'>
+                    <li><a href='home.html'>Home</a></li>
+                    <li><a href='#'>Services</a></li>
+                    <li><a href='#'>Contact</a></li>
+                    <li><button class='loginbtn' onclick="document.getElementById('login-form').style.display='block'" style="width:auto;">Login</button></li>
+                </ul>
+            </nav>
+        </div>
+        <div id='login-form'class='login-page'>
+            <div class="form-box">
+                <div class='button-box'>
+                    <div id='btn'></div>
+                    <button type='button'onclick='login()'class='toggle-btn'>Log In</button>
+                    <button type='button'onclick='register()'class='toggle-btn'>Register</button>
+                </div>
+                <form id='login' class='input-group-login' method="post" action="/login">
+                    <label for="classes">Choose a Class:</label>
+                        <select name="classes" id="classes">
+                            <option value="user">User</option>
+                            <option value="supplier">Supplier</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    <br><br>
+                    <input name="username" type='email'class='input-field'placeholder='Enter Email' required >
+                    <input name="password" type='password'class='input-field' id="id_password" placeholder='Enter Password' required>
+                    <i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i>
+                    <input type='checkbox'class='check-box'><span>Remember Password</span>
+                    <button type='submit'class='submit-btn' style="width:auto;">Login</button>
+                </form>
+		 <form id='register' class='input-group-register' method="post" action="/signup">
+            <label for="classes">Choose a Class:</label>
+                    <select name="classes" id="classes">
+                      <option value="user">User</option>
+                      <option value="supplier" disabled>Supplier</option>
+                      <option value="admin" disabled>Admin</option>
+                    </select>
+                    <br><br>
+		     <input name="fullName"type='text'class='input-field'placeholder='Full Name' required>
+		     <input name="email" type='email'class='input-field'placeholder='Email ' required>
+		     <input name="phone" type="Number" class='input-field'placeholder='Mobile Number(01.......)' required>
+		     <input name="address" type='text'class='input-field' placeholder='Address' required>
+             <input name="password" type='password' class='input-field' placeholder='Enter Password' id="id_password2" required>
+             <i class="far fa-eye" id="togglePassword2" style="margin-left: -30px; cursor: pointer;"></i>
+             <!-- <input type='password'class='input-field'placeholder='Confirm Password'  required> -->
+		     <input type='checkbox'class='check-box' required><span>I agree to the terms and                                                   conditions</span>
+                    <button type='submit'class='submit-btn'>Register</button>
+	         </form>
+            </div>
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript" src="javascript/login.js"></script> 
+
+    <script src="vendor/jquery/jquery.min.css"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="alert/dist/sweetalert.css">
+    <script type="text/javascript">
+    	var status=document.getElementById("status").value;
+    	if(status=="success"){
+    		swal("Congrats","Account Created Successfully", "success");
+    	}
+    	else if(status=="failed"){
+    		swal("Sorry","Invalid Username or Password", "error");
+    	}
+    
+    </script>
+</body>
+</html>

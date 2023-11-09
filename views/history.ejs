@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Online Shopping</title>
+	<link rel="stylesheet" type="text/css" href="view.css">
+</head>
+<body>
+	<header>
+		<nav>
+			
+			<div class="dropdown">
+				
+				<span><h1><%=myself.role%> info</h1></span>
+				<div class="dropdown-content">
+					<h4>
+						<p> <%=myself.fullName%> </p>
+						<p>Balance : <%=myself.balance%> taka </p>
+					</h4>
+				</div>
+			  </div>
+		
+      <h1> <center>Online Shopping</center></h1>
+			<a href="/logout">Logout</a>
+		</nav>
+	</header>
+
+	<main>
+		<form method="post" action="/received">
+			<h2>Purchase Record</h2>
+			<table class="css-serial">
+				<thead>
+					<tr>
+						<th>SL</th>
+						<th>Date</th>
+                        <th>Customer</th>
+						<th>Products</th>
+						<th>Price</th>
+                        <th>Transaction ID</th>
+                        <th style="text-align: center;">Staus</th>
+					</tr>
+				</thead>
+        
+				<tbody>
+                   <% orders.reverse().forEach(function(item) { %>
+                    <% let date=item.time.getDate() + "-" + (parseInt( item.time.getMonth() )+parseInt('1'))+ "-" +item.time.getFullYear()%>
+                    <tr>
+                        <td></td>
+                        <td> <%=date%> </td>
+                        <td><%=item.customerName%></td>
+                        <td>
+                            <% item.products.forEach(function(malamal) { %>
+                                <%=malamal.productName%>  x<%=malamal.quantity%> <br>
+                            <%});%>
+                        </td>
+                        <td><%=item.totalCost%> Tk</td>
+                        <td><%=item.transactionId%></td>
+						
+                        <td ><center><button style="width:90%" type="submit" name="orderID" value=<%=item._id%>> <h3><%=item.status%></h3></button></center></td>
+                    </tr>
+                <%});%>
+				</tbody>
+				
+			</table>
+	
+		
+	</form>
+	</main>
+	<style>
+		input[type="number"] 
+		{
+			width: 100%;
+			padding: 8px;
+			border-radius: 5px;
+			border: 1px solid #ccc; 
+			font-size:17px;
+		}
+	</style>
+</body>
+</html>
